@@ -1,0 +1,22 @@
+@import "./main.scss";
+@import "./courses.scss";
+@import "./themes.scss";
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+  font-family: 'Nunito';
+  color: #39414B;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  margin-left: 0;
+  padding-left: 0;
+}
