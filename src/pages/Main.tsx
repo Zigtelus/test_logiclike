@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 // utils
 import { fetchData } from "../utils/fetchData";
 
+// types
+import { IItem } from "../types";
+
 // components
 import { Themes } from "../components/Themes";
 import { Courses } from "../components/Courses";
@@ -12,19 +15,29 @@ import { Courses } from "../components/Courses";
 // main code
 const Main: React.FC = () => {
 
-  const [data, setData] = useState<[] | null>(null);
+  const [data, setData] = useState<IItem[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(()=> {
+    setLoading(true);
+
     fetchData({
-      url: "https://logiclike.com/docs/courses.json", 
+      url: "https://logiclike.com/docs/courses.json1", 
       method: "GET", 
-      callback: setData
+      callback: (data?: IItem[])=> {
+
+        if (data) {
+          setData(data);
+        }
+
+        setLoading(false);
+      }
     })
   }, []);
 
   if (data === null) return <div className="main">Ошибка соединения</div>;
 
-  const sortList = data.reduce((acum: any, item: any) => {
+  const sortList = data.reduce((acum: {tags: string[]}, item: IItem) => {
     const tags = [...item.tags];
     
     while (tags.length) {
@@ -46,11 +59,17 @@ const Main: React.FC = () => {
 
   return <div className="main">
     <Themes choiceTheme={choiceTheme} list={sortList.tags} />
-    <Courses cards={data} getStateCourses={getStateCourses} />
+
+    {
+      loading ?
+      <div>загрузка данных</div> :
+      <Courses cards={data} getStateCourses={getStateCourses} />
+    }
+    
   </div>;
 
   // стейет из компоненту "Courses" назначаем для переменной "stateCourses"
-  function getStateCourses(state: any) {
+  function getStateCourses(state: (item: string)=> void) {
     stateCourses = state;
   };
 

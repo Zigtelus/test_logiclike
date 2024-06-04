@@ -13,9 +13,9 @@ import { Main } from './pages/Main';
 const contain = document.getElementById('root');
 const root = ReactDOM.createRoot(contain);
 root.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <Main/>
     </BrowserRouter>
-  // </React.StrictMode>
+  </React.StrictMode>
 );

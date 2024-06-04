@@ -1,10 +1,13 @@
 // modules
 import React, { useState } from "react";
 
+// types
+import { IItem } from "../types";
+
 // main code
 interface IProps {
-	cards: any[];
-	getStateCourses: (state: any)=> void;
+	cards: IItem[];
+	getStateCourses: (state: (item: string)=> void )=> void;
 };
 const Courses: React.FC <IProps> =({cards, getStateCourses})=> {
 

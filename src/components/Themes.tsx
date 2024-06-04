@@ -9,11 +9,11 @@ interface IProps {
 
 const Themes: React.FC<IProps> =({list, choiceTheme})=> {
 
-	const [theme, setTheme] = useState("Все темы");
+	const [theme, setTheme] = useState<String>("Все темы");
 
 	return <ul className="themes">
 		{
-			list.map((item: any) => {
+			list.map((item: string) => {
 				return <li 
 				  key={item}
 					className={theme === item ? "themes__item-active themes__item" : "themes__item"}
