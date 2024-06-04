@@ -22,7 +22,7 @@ const Main: React.FC = () => {
     setLoading(true);
 
     fetchData({
-      url: "https://logiclike.com/docs/courses.json1", 
+      url: "https://logiclike.com/docs/courses.json", 
       method: "GET", 
       callback: (data?: IItem[])=> {
 
